@@ -7,4 +7,14 @@ router.route("/").get((req,res)=>{
         .catch(err=>{res.status(400).json("Error: "+err)})
 })
 
+router.route("/").post((req,res)=>{
+    const newData=new CovidData({
+        "Patient Number":req.body.PatientNumber,
+        "State Patient Number":req.body.StatePatientNumber,
+    })
+    newData.save()
+        .then(()=>res.json("saved"))
+        .catch(err=>res.status(400).json("Error: "+err))
+})
+
 module.exports=router;
